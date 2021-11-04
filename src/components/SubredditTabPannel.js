@@ -18,9 +18,9 @@ function TabPanel({children, index, favorites, ...other}){
             aria-labelledby={`subreddit-tab`}
             {...other}
         >
-            <Box sx={{ p: 3 }}>
+            <Box sx={{ p: 3, display: 'flex', flexFlow: 'row wrap' }}>
                 {favorites.map((fav, i) => 
-                    <FavoriteCard favorite={fav} index={i}/>
+                    <FavoriteCard key={i} favorite={fav} index={i}/>
                 )}
             </Box>
         </div>
@@ -54,10 +54,6 @@ export default function SubredditTabs({ subreddits }) {
         setIndex(newIndex);
     };
   
-    subreddits.map((sub, i) => 
-                console.log(sub)
-    )
-
     return (
       <Box sx={{ width: '100%' }}>
         <Paper sx={{ borderBottom: 1, borderColor: 'divider', borderRadius: 0 }} elevation={0}>
@@ -68,14 +64,14 @@ export default function SubredditTabs({ subreddits }) {
             scrollButtons="auto"
           >
             {subreddits.map((sub, i) => 
-                <Tab 
+                <Tab key={i}
                     label={`${getOnlyKey(sub)} (${getOnlyValue(sub).length})`} 
                     {...a11yProps(i)} />
                 
             )}
           </Tabs>
         </Paper>
-        <TabPanel index={index} favorites={favorites} />
+        <TabPanel index={index} favorites={favorites}/>
       </Box>
     );
   }

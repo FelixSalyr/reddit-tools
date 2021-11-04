@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import CircularProgress from '@mui/material/CircularProgress';
 import { ColorModeContext } from '../providers/ColorModeProvider'
 import { useAuth } from '../providers/AuthProvider';
 import MenuItem from '@mui/material/MenuItem';
@@ -21,10 +22,25 @@ const Header = () => {
       setAnchorEl(event.currentTarget);
     };
   
-    const handleClose = () => {
-      setCurrentUser(null);
+    const handleClose = (e) => {
       setAnchorEl(null);
     };
+
+    const logout = () => {
+      handleClose();
+      setLoading(true);
+      fetch(`http://localhost:3000/logout`, {
+            method: 'GET',
+            credentials: "include",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Credentials": true
+            }
+        })
+        .then(setLoading(false))
+        .then(setCurrentUser(null));
+    }
 
     return (
         <AppBar position="absolute">
@@ -48,7 +64,8 @@ const Header = () => {
                   aria-haspopup="true"
                   onClick={handleMenu}
                   color="inherit"
-                  endIcon={<AccountCircle />}
+                  disabled={loading}
+                  endIcon={loading ? <CircularProgress color="inherit" /> : <AccountCircle />}
                 >
                   {currentUser.name}
                 </Button>
@@ -67,7 +84,7 @@ const Header = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={logout} id='LogoutMenuItem'>Logout</MenuItem>
                 </Menu>
               </>
             }
