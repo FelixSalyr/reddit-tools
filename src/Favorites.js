@@ -2,17 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from './providers/AuthProvider';
 // Custom Component imports
 import { CircularProgressBox } from './components/circularProgressBox';
-import FavoriteCard from './components/favoriteCard';
 import SubredditTabs from './components/SubredditTabPannel';
-// UI Component imports
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-// import services
-import { getSaved } from './services/historyService';
 // import utilities
 import { groupBy, getOnlyValue } from './utilities/objects';
 
@@ -26,7 +16,7 @@ export default function Favorites() {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:3000/history/saved`, {
+        fetch(`http://nodeexpressoauth2reddit-env-1.eba-uf64jrde.us-east-1.elasticbeanstalk.com/history/saved`, {
             method: 'GET',
             credentials: "include",
             headers: {

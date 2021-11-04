@@ -5,7 +5,7 @@ export const checkAuthSuccess = () => {
     const endpoint = hostUrl+'/auth/login/success';
     console.log(endpoint)
     // return a promise with the data from our api endpoing
-    return fetch(`http://localhost:3000/auth/login/success`, {
+    return fetch(`http://nodeexpressoauth2reddit-env-1.eba-uf64jrde.us-east-1.elasticbeanstalk.com/auth/login/success`, {
         method: 'GET',
         credentials: "include",
         headers: {

@@ -29,7 +29,7 @@ const Header = () => {
     const logout = () => {
       handleClose();
       setLoading(true);
-      fetch(`http://localhost:3000/logout`, {
+      fetch(`http://nodeexpressoauth2reddit-env-1.eba-uf64jrde.us-east-1.elasticbeanstalk.com/logout`, {
             method: 'GET',
             credentials: "include",
             headers: {
