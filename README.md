@@ -1,6 +1,61 @@
-# Getting Started with Create React App
+## Reddit Tools
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An application to extend [Reddit](https://reddit.com) functionallity. This is a personal
+project built React to learn the framework. It is intended to function on top of a Node.js API
+that is hosted in a seperate repository located [here](https://github.com/FelixSalyr/reddit-oauth).
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Using [MUI](https://mui.com/) as a component library.
+
+## Project Screen Shots
+
+Login Card:
+![Login card screenshot](screenshots/login.png)
+
+Favorites View:
+![Favorites view screenshot](screenshots/favorites.png)
+
+Favorites View (dark mode):
+![Favorites view in dark mode variant](screenshots/favorites_darkmode.png)
+
+## Project Status
+
+This project is still in development. I plan to implement the following (in order):
+
+### Deployment
+
+Currently woriking on deploying this project to AWS EC2. The Node.js API is currently not
+accepting HTTPS requests. I'd also like to Automate this process as much as possible.
+
+### Unit Tests!
+
+Unit tests for every project is a must.
+
+### Set Up Environment Vars
+
+There's some environment specific variables that need to be moved to the .env file with both dev and prod versions.
+
+### Async loading of all Saved Posts
+
+Currently only the most recent 25 posts are loaded, but I plan to update the application to asynchronously load all saved posts and update the interface as the posts slowly tick in. I haven't decided if I want to cache this information.
+
+### Performance improvements
+
+There are numerous optimizations that can still be made.
+
+### Custom views for specific Subreddits
+
+I wanted to add specific features to certain Subreddit tabs. For examples, I save posts of places I want to visit, I would like to see if I can leverage some language parsing library to condence that data to a list of place names which I could map to location data and plot using some mapping library.
+
+## Project Screen Shots
+
+Coming Soon!
+
+## Reflection
+
+ - I created this project to pick up as much of React as I could, as quickly as I could
+ - It has been a good learning experience and I enjoy how easy it is to share data across
+   the entire application
+ - A large portion of my time was spent trying to get the Node.js application working with the reddit API which detracted from the time I had to spend on the API. Deploying to AWS with a proper configuration has also been a significant challenge.
 
 ## Available Scripts
 

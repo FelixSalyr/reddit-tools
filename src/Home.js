@@ -11,7 +11,11 @@ import { CircularProgressBox } from './components/circularProgressBox';
 // Hook imports
 import { useAuth } from './providers/AuthProvider';
 
-
+/**
+ * To be replaced by Routing later, but for now, this component
+ * toggles the interface between the auth states
+ * @param {boolean} loading - inherit loading state from parent
+ */
 export default function Home({ loading }) {
     // Consuming our auth Hook. 
     const { currentUser } = useAuth();

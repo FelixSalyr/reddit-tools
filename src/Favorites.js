@@ -6,7 +6,11 @@ import SubredditTabs from './components/SubredditTabPannel';
 // import utilities
 import { groupBy, getOnlyValue } from './utilities/objects';
 
-
+/**
+ * Topmost component of the Favorites page. Currently 
+ * just a wrapper for a subreddit tabs component that formats
+ * and injects data
+ */
 export default function Favorites() {
 
     const { currentUser, setCurrentUser } = useAuth();
@@ -25,6 +29,8 @@ export default function Favorites() {
                 "Access-Control-Allow-Credentials": true
             }
         })
+            // Auth responses don't trigger errors
+            // so we'll manually throw
             .then((response) => {
                 if(response.status!==200)
                     throw new Error(response.status);
@@ -33,6 +39,9 @@ export default function Favorites() {
             .then(setFavorites)
             .then(()=> setLoading(false))
             .catch((err) => {
+                // If bearer token expires, the API send
+                // a 401, for now we'll log out so the 
+                // user can choose to re-auth
                 if(err.message === "401")
                     setCurrentUser(null);
                 setError(err);
@@ -44,9 +53,9 @@ export default function Favorites() {
     if (error) return <pre>There was an oops: {JSON.stringify(error)}</pre>
     if (!favorites) return null;
 
-    console.log(favorites);
+    // Group our favorites by subreddit
     let subreddits = groupBy(favorites, 'subreddit')
-    
+    // Data manipulation to a more usable format
     subreddits = Object.keys(subreddits)
         // convert to simple objects {subredditName: Array<Favorites>}
         .map((sub, i) => ({[sub]: subreddits[sub]}))
@@ -59,31 +68,3 @@ export default function Favorites() {
         </>
     )
 }
-
-/*
-const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        if(!userName) return;
-        setLoading(true);
-        fetch(`https://api.github.com/users/${userName}`)
-        .then((response) => response.json())
-        .then(setData)
-        .then(()=> setLoading(false))
-        .catch(setError);
-    }, [userName]);
-
-    if (loading) return <h1>Loading...</h1>;
-    if (error) return <pre>There was an oops: {JSON.stringify(error, null, 2)}</pre>
-    if (!data) return null;
-
-    return (
-        <div>
-            <h1>{data.name}</h1>
-            <p>{data.location}</p>
-            <img alt={data.login} src={data.avatar_url}/>
-        </div>
-    )
-*/

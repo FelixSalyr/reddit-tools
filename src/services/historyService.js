@@ -2,8 +2,11 @@ const {NODE_SERVER_SCHEME,NODE_SERVER_HOST,NODE_SERVER_PORT} = process.env;
 const hostUrl = `${NODE_SERVER_SCHEME}://${NODE_SERVER_HOST}:${NODE_SERVER_PORT}`;
 
 export const getSaved = () => {
-    // return a promise with the data from our api endpoing
-    return fetch(`http://localhost:3000/history/saved`, {
+    // NOTE: the endpoint url is butchered when passed to the
+    // fetch function. Haven't figured out why this occurs yet.
+    const endpoint = hostUrl+'/history/saved';
+    // return a promise with the data from our api endpoint
+    return fetch(`http://nodeexpressoauth2reddit-env-1.eba-uf64jrde.us-east-1.elasticbeanstalk.com/history/saved`, {
         method: 'GET',
         credentials: "include",
         headers: {

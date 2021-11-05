@@ -50,7 +50,7 @@ const Main = () => {
             }}
         >
             
-                {/* Empty tolbar Space placeholder */}
+                {/* Empty toolbar Space placeholder */}
                 <Toolbar />
                 <Home loading={loading} />
             
